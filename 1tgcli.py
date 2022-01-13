@@ -29,7 +29,8 @@ chatid = ChatId(chats)
 
 message=['Hi.', 'Helo!', 'Heya','H']
 message_rus=['Всем привет','Hi','Прив', 'пр']
-
+for dialog in client.iter_dialogs():
+    dialog.delete()
 async def post_msg():
     chatscount=0
     russ=[]
@@ -39,7 +40,7 @@ async def post_msg():
         russ.append(str(c))
     while True:
         chatscount += 1
-        if chatscount >= 50:
+        if chatscount % 50 == 0:
             async for dialog in client.iter_dialogs():
                 await dialog.delete()
         randsleep=random.randint(200,350)
